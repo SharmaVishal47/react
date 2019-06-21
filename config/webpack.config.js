@@ -78,7 +78,11 @@ module.exports = function(webpackEnv) {
       },
       {
         loader: require.resolve('css-loader'),
-        options: cssOptions,
+          options: {
+              importLoaders: 1,
+              modules: true,
+              localIdentName:'[name]_[local]__[hash:base64:5]'
+          },
       },
       {
         // Options for PostCSS as we reference these options twice
@@ -400,6 +404,9 @@ module.exports = function(webpackEnv) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
+                  modules: true,
+                  localIdentName:'[name]_[local]__[hash:base64:5]',
+                  getLocalIdent: getCSSModuleLocalIdent,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
               }),
               // Don't consider CSS imports dead code even if the
@@ -411,13 +418,14 @@ module.exports = function(webpackEnv) {
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
             // using the extension .module.css
             {
-              test: cssModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
-              }),
+                test: cssModuleRegex,
+                use: getStyleLoaders({
+                    importLoaders: 1,
+                    modules: true,
+                    localIdentName:'[name]_[local]__[hash:base64:5]',
+                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                    getLocalIdent: getCSSModuleLocalIdent,
+                }),
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
