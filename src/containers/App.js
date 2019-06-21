@@ -4,6 +4,12 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constuctor');
+    }
+
     state = {
         persons: [
             { id:'dsfdsd',name: 'Vishu', age: 38 },
@@ -12,6 +18,18 @@ class App extends Component {
         ],
         otherState: 'some other value',
         showPersons: false
+    }
+
+    static getDerivedStateFormProps(props, state){
+        console.log('[App.js] getDerivedStatefromProps', props);
+        return state;
+    }
+    componentDidMount(){
+        console.log('[App.js] componentDidMount');
+    }
+
+    componentWillMount(){
+        console.log('[App.js] componentWillMount')
     }
 
     nameChangedHandler = ( event, id ) => {
@@ -39,6 +57,8 @@ class App extends Component {
         this.setState( { showPersons: !doesShow } );
     }
     render () {
+
+        console.log('[App.js] rendor');
         let persons = null;
         if ( this.state.showPersons ) {
             persons =
