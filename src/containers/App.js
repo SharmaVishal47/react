@@ -19,7 +19,9 @@ class App extends Component {
         ],
         otherState: 'some other value',
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        changeCounter : 0,
+        authenticated: false
     };
 
     static getDerivedStateFormProps(props, state){
@@ -61,7 +63,10 @@ class App extends Component {
     togglePersonsHandler = () => {
         const doesShow = this.state.showPersons;
         this.setState( { showPersons: !doesShow } );
-    }
+    };
+  loginHndler = () => {
+      this.setState({authenticated: true});
+  };
     render () {
 
         console.log('[App.js] rendor');
@@ -72,6 +77,7 @@ class App extends Component {
                     persons={this.state.persons}
                     clicked={this.deletePersonHandler}
                     changed={this.nameChangedHandler}
+                    isAuntheticted = {this.state.authenticated}
                 />;
         }
 
@@ -82,10 +88,12 @@ class App extends Component {
                 this.setState({showCockpit: false});
                 }}
                 >Remove Cockpit</button>
-                {this.state.showCockpit ? (<Cockpit
+                {this.state.showCockpit ? (
+                    <Cockpit
                     showPerson={this.state.showPersons}
                     personsLength={this.state.persons.length}
                     clicked={this.togglePersonsHandler}
+                    login = {this.loginHndler}
                 />) :null}
                 {persons}
             </withClass>

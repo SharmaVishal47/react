@@ -9,6 +9,7 @@ class Person extends Component{
         return (
                 <Auxiliary>
                    {/* <React.Fragment>*/}
+                    {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in</p>}
                 <p key={"i1"} onClick={this.props.click}>I am a {this.props.name} year old{this.props.age}!</p>
                 <p key={"i2"}>{this.props.children}</p>
                 <input key={"i3"} type="text" onChange={this.props.changed} value={this.props.name}/>
