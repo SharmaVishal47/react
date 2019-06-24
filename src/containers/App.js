@@ -17,8 +17,9 @@ class App extends Component {
             { id:'dsfdsd2', name: 'Max', age: 23 }
         ],
         otherState: 'some other value',
-        showPersons: false
-    }
+        showPersons: false,
+        showCockpit: true
+    };
 
     static getDerivedStateFormProps(props, state){
         console.log('[App.js] getDerivedStatefromProps', props);
@@ -28,14 +29,18 @@ class App extends Component {
         console.log('[App.js] componentDidMount');
     }
 
-    componentWillMount(){
+  /*  componentWillMount(){
         console.log('[App.js] componentWillMount')
-    }
+    }*/
 
+  shouldComponentUpdate(nextProps, nextState){
+      console.log('shouldcomponent');
+      return true;
+  }
     nameChangedHandler = ( event, id ) => {
         const personIndex = this.state.persons.findIndex(p =>{
             return p.id === id
-        })
+        });
         const person = {...this.state.persons[personIndex]};
         person.name = event.target.value;
         const persons = [...this.state.persons];
@@ -48,7 +53,7 @@ class App extends Component {
 
     deletePersonHandler = (personIndex) =>{
 // const persons = this.state.persons.slice();
-        const persons = [...this.state.persons]
+        const persons = [...this.state.persons];
         persons.splice(personIndex,1);
         this.setState({persons:persons});
     }
@@ -72,11 +77,15 @@ class App extends Component {
         return (
 
             <div className={classes.App}>
-                <Cockpit
+                <button onClick = {()=> {
+                this.setState({showCockpit: false});
+                }}
+                >Remove Cockpit</button>
+                {this.state.showCockpit ? (<Cockpit
                     showPerson={this.state.showPersons}
                     persons={this.state.persons}
                     clicked={this.togglePersonsHandler}
-                />
+                />) :null}
                 {persons}
             </div>
 
