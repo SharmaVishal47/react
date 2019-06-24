@@ -3,12 +3,21 @@ import React, {Component} from 'react';
 import Person from "./Person/Person";
 
 class Persons extends Component{
-    static getDerivedStateFromProps(props, state) {
+   /* static getDerivedStateFromProps(props, state) {
         console.log('GetDerivedState');
         return state;
-    }
+    }*/
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('')
+        console.log('shouldComponentUpdate');
+        if (
+            nextProps.persons !== this.props.persons ||
+            nextProps.changed !== this.props.changed ||
+            nextProps.clicked !== this.props.clicked
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
     getSnapshotBeforUpdate(prevProps, prevStte){
         console.log('getSnapshotbeforUpdate');
