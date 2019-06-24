@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 
 import Person from "./Person/Person";
 
-class Persons extends Component{
+class Persons extends PureComponent{
    /* static getDerivedStateFromProps(props, state) {
         console.log('GetDerivedState');
         return state;
     }*/
-    shouldComponentUpdate(nextProps, nextState) {
+  /*  shouldComponentUpdate(nextProps, nextState) {
         console.log('shouldComponentUpdate');
         if (
             nextProps.persons !== this.props.persons ||
@@ -29,7 +29,7 @@ class Persons extends Component{
         console.log(snapshot);
         return {message: 'Snapshot'};
 
-    }
+    }*/
 
 
 render(){
